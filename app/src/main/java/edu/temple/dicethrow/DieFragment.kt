@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlin.random.Random
-
+const val DIESIDE = "sidenumber"
 class DieFragment : Fragment() {
 
-    val DIESIDE = "sidenumber"
+
 
     lateinit var dieTextView: TextView
 
     var dieSides: Int = 6
+    var biggerDieSide : Int = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,5 +46,15 @@ class DieFragment : Fragment() {
 
     fun throwDie() {
         dieTextView.text = (Random.nextInt(dieSides) + 1).toString()
+    }
+
+    companion object{
+        fun newInstance(sides:Int) = DieFragment().apply{
+            arguments = Bundle().apply{putInt(DIESIDE, sides)}
+
+            //create bundle, place an int where the key is DIESIDE.
+            // And the value is the parameter
+            //create an instanve of DieFragment, set and instance of the fragment to be the bundle and be the fragment
+        }
     }
 }

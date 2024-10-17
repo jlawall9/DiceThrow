@@ -6,6 +6,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,5 +18,14 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.rollDiceButton).setOnClickListener{
             (supportFragmentManager.findFragmentById(R.id.DiceContainer) as DieFragment).throwDie()
         }
+
+
+        val dieFrag = DieFragment.newInstance(sides = 100)
+        if(supportFragmentManager.findFragmentById(R.id.DiceContainer) !is DieFragment)
+
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.DiceContainer, dieFrag)
+            .commit()
     }
 }
