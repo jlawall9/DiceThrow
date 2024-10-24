@@ -8,21 +8,21 @@
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/DiceContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/ButtonFragment"
+        android:name="edu.temple.dicethrow.ButtonFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/DisplayFrag"
         android:name="edu.temple.dicethrow.DieFragment"
-        android:layout_width="3dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DiceContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/ButtonFragment" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import kotlin.random.Random
 const val ROLLKEY = "key"
 const val DIESIDE = "sidenumber"
 class DieFragment : Fragment() {
 
 
-
+    lateinit var dieViewModel: DieViewModel
     lateinit var dieTextView: TextView
 
     var dieSides: Int = 6
@@ -21,6 +22,8 @@ class DieFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        dieViewModel = ViewModelProvider(requireActivity())[DieViewModel::class.java]
         var dicethrow = -1
         arguments?.let {
             it.getInt(DIESIDE).run {
@@ -35,40 +38,22 @@ class DieFragment : Fragment() {
         outState.putInt(ROLLKEY, rollValue)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_die, container, false).apply {
-            dieTextView = findViewById(R.id.dieTextView)
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        savedInstanceState?.run{
-            rollValue = getInt(ROLLKEY)
-        }
-        if (rollValue == 0){
+        dieViewModel.getDieRoll().observe(viewLifecycleOwner) {
+    dieTextView.text = it.toString()
+}
+        if(dieViewModel.getDieRoll().value == null){
             throwDie()
-        }else {
-            dieTextView.text = rollValue.toString()
-
         }
 
+        //throwDie()
 
-//        rollValue = throwDie()
-//        view.setOnClickListener{
-//            rollValue = throwDie()
-//        }
     }
 
     fun throwDie() {
-        val rollValue = Random.nextInt(dieSides) + 1
-        dieTextView.text = rollValue.toString()
-
+        dieViewModel.setDieRoll(Random.nextInt(dieSides) +1)
 
     }
 

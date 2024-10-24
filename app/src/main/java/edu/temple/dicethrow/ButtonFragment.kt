@@ -1,5 +1,6 @@
 package edu.temple.dicethrow
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,7 +19,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ButtonFragment : Fragment() {
-
+    override fun onAttach(context: Context){
+        if (context !is ButtonInterface)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

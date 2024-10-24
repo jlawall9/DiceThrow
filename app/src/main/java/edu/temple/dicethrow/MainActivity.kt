@@ -24,15 +24,16 @@ class MainActivity : AppCompatActivity(), ButtonFragment.ButtonInterface{
         //
 
         val dieFrag = DieFragment.newInstance(sides = 100)
-        if(supportFragmentManager.findFragmentById(R.id.DiceContainer) !is DieFragment)
+        if(supportFragmentManager.findFragmentById(R.id.fragmentContainerView) !is DieFragment)
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.DiceContainer, dieFrag)
+            .add(R.id.fragmentContainerView, dieFrag)
             .commit()
     }
 
     override fun buttonClicked() {
-        TODO("Not yet implemented")
+        (supportFragmentManager
+            .findFragmentById(R.id.fragmentContainerView) as DieFragment).throwDie()
     }
 }
